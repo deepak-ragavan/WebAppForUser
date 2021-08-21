@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>User Registration</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+     <div th:replace="fragments/topnav :: navbar">
+     </div>
+     <div align="center">
+     <h2>User Registration</h2>
+     <form name="myform" action="/saveUserDetails" method="post" onsubmit="return validateform()">
+         <input type="text" name="firstName" placeholder="Enter First Name" ><br><br>
+         <input type="text" name="lastName" placeholder="Enter Last Name" ><br><br>
+         <input type="text" name="email" placeholder="Enter Email Id"><br><br>
+         <input type="date" name="dob" placeholder="Enter Date of Birth"><br><br>
+         <input type="password" id="password" name="password" placeholder="Enter Password" onkeyup='check();'><br><br>
+         <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Enter confirm Password"  onkeyup='check();'><br><br>
+         <input type="text" id="key" name="adminKey" placeholder="Admin Key"><br><br>
+         <input class="admin" type="hidden" id="admin" name="isAdmin">
+         <span id='message'></span><br><br>
+         <button type="submit">Register</button><br><br>
+     </form>
+     <p>If you Already Registered Go to Login Page</p>
+ </div>
+ <script>  
+ function validateform()  
+ {  
+ var x=document.myform.email.value;  
+ var regexp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+ if(x=="") {   
+   alert("Email Id not to be Empty");
+   return false;
+   }
+ else if(!(regexp.test(String(x).toLowerCase()))){
+ 	 alert("Please enter a valid email id");  
+ 	 return false; 
+ }
+ 
+ var Dob = document.myform.dob.value;
+ var dateReg = /^\d{2}([./-])\d{2}\1\d{4}$/
+ if(Dob==""){
+	 alert("date not to be Empty");
+	 return false;
+ }
+ else if(Dob.match(dataReg)){
+	 alert("Enter the date in DD/MM/YYYY format");
+	 return false
+ }
+ 	
+ var password=document.myform.password.value; 
+ if(password==""){  
+ 	
+ 	alert("password not to be Empty");
+ 	return false;
+ }
+ else if(password.length<8){
+ 	alert("Password must be at least 8 characters long.");  
+ 	return false; 
+ }
+ 
+ var adminkey = document.getElementById("key").value;
+ if(adminkey==""){
+	 alert("Admin key not ne null");
+ }
+ else if(adminkey=="1234"){
+	 document.getElementById("admin").value = true;
+	 alert("you are registered as Admin");
+ }
+ else{
+	 document.getElementById("admin").value = false;
+	 alert("you are registered as User");
+	 
+ }
+ }
+ 
+var check = function() {
+	    if (document.getElementById('password').value ==
+	         document.getElementById('confirmpassword').value) {
+	         document.getElementById('message').style.color = 'green';
+	         document.getElementById('message').innerHTML = 'matching';
+	    } else {
+	         document.getElementById('message').style.color = 'red';
+	         document.getElementById('message').innerHTML = 'not matching';
+	    }
+}
+</script>  
+</body>
+</html>
