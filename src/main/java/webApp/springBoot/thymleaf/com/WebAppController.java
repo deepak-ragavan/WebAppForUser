@@ -24,6 +24,7 @@ public class WebAppController {
 	
 	@GetMapping("/Registration")
 	public ModelAndView userRegistration() {
+		System.out.println("hellohgfkjyhtdhfj,gfhdgh");
 	    ModelAndView mv = new ModelAndView();
 	    mv.setViewName("Registration");
 	    return mv;
