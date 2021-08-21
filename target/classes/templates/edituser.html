@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<style>
+	.hide-input input{
+		display: none;
+	}
+</style>
+</head>
+<body>
+    <div align="center">
+        <form name="myform" action="/updateuser" method="post" onsubmit="return validateform()">
+            <input  type="hidden" name="id" th:value="${user.id}">
+        	Enter the first name : <input type="text" name="firstName" th:value="${user.firstName}"><br><br>
+        	Enter the last name :  <input type="text" name="lastName" th:value="${user.lastName}"><br><br>
+        	Enter the email : <input type="text" name="email" th:value="${user.email}"><br><br>
+        	Enter the password :<input type="text" name="password" th:value="${user.password}"><br><br>
+        	Enter the dateofbirth:<input type="date" name="dob" th:value="${user.dob}"><br><br>
+        	<input type="submit" value="update">
+        </form>
+    </div>
+<script>
+function validateform()  
+{  
+var x=document.myform.email.value;  
+var regexp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+if (!(regexp.test(String(x).toLowerCase()))){  
+  alert("Please enter a valid email id");  
+  return false;  
+  }  
+	
+var password=document.myform.password.value; 
+if(password.length<8){  
+	alert("Password must be at least 8 characters long.");  
+	return false; 
+}
+var Dob = document.myform.dob.value;
+if(Dob==""){
+	 alert("date not to be Empty");
+	 return false;
+}
+}
+</script>
+</body>
+</html>

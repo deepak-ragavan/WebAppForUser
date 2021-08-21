@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Edit Student Details</title>
+</head>
+<body>
+<div align="center">
+        <form name="myform" th:action="@{/updatestudent/}+(${user.id})" method="post" onsubmit="return validateform()">
+        	Enter the hobby : <input type="text" name="hobby" th:value="${user.hobby}"><br><br>
+        	Enter the known language :  <input type="text" name="knownlanguage" th:value="${user.knownlanguage}"><br><br>
+        	Enter the location : <input type="text" name="location" th:value="${user.location}"><br><br>
+        	Enter the designation :<input type="text" name="designation" th:value="${user.designation}"><br><br>
+        	<input type="submit" value="update">
+        </form>
+    </div>
+
+</body>
+</html>

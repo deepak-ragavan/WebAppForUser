@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>User Profile</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<style>
+	.hide-input input{
+		display: none;
+	}
+</style>
+</head>
+<body>
+    <div th:replace="fragments/innertopnav :: navbar">
+     </div>
+       <div align="center">
+        <h1>User Details</h1>
+             <table border="1" id="test">
+            <thead>
+                <tr>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>DateofBirth</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="User : ${listofDetails}">
+                    <td id="firstname" th:text="${User.firstName}"></td>
+                    <td id="lastname" th:text="${User.lastName}"></td>
+                    <td id="dob" th:text="${User.dob}"></td>
+                    <td id="email" th:text="${User.email}"></td>
+                    <td id="password" th:text="${User.password}"></td>
+                    <td> 
+                         <a th:href="@{edituser/}+(${User.id})">Edit</a>
+                         <a th:href="@{deleteuser/}+(${User.id})">Delete</a>
+                   </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
